@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>秒表计时器</title>
+	</head>
+	<body>
+		<div align="center">
+			<h1>秒表计时器</h1>
+			<table>
+				<tr>
+					<td id="d1">00</td>
+					<td>:</td>
+					<td id="d2">00</td>
+				</tr>
+				<tr>
+					<td><a href ="javascript:start()">开始</a></td>
+					<td><a href ="javascript:stop()">暂停</a></td>
+					<td><a href ="javascript:clear()">清零</a></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	
+	<script>
+		var d1 = document.getElementById("d1")
+		var d2 = document.getElementById("d2")
+		var num1 = 0  //记录秒
+		var num2 = 0  //记录毫秒
+		var id;
+		var flag=true;
+		function start(){
+			if (flag==true){
+				id=setInterval("changeD2()",10)
+				flag=false
+			}
+		}
+		function stop(){
+			clearInterval(id)
+			flag=true
+		}
+		function clear(){
+			stop()
+			num1=0
+			num2=0
+			d1.innerText="00"
+			d2.innerText="00"
+		}
+		//毫秒的计时
+		function changeD2(){
+			num2+=1
+			if(num2==100){
+				num2=0
+				//修改秒的值
+			
+				changeD1()
+			}
+			if(num2<10){
+				d2.innerText = "0"+num2
+			}else{
+				d2.innerText = num2 //给页面中的毫秒赋值
+			}
+		}
+		//秒的改变
+		function changeD1(){
+			num1+=1;
+			if(num1<10){
+				d1.innerText = "0"+num1
+			}else{
+				d1.innerText = num1 //给页面中的秒赋值
+			}
+		}
+	</script>
+</html>
